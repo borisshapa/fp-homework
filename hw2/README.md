@@ -1,49 +1,55 @@
-# Haskell: ДЗ 2 -- Функторы и монады
+# Haskell: HW 2 – Functors and monads
 
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com//fp-homework/blob/master/hw2/LICENSE)
 
-Второе домашнее задание помогает в усвоении материала про монады и функторы.
-Обратите внимание, что задание соответствует материалу, который рассказан в темах со 4 по 5ю [отсюда](https://github.com/jagajaga/FP-Course-ITMO).
+The second homework assignment will help you to learn the material about monads and functors.
+Please note that the assignment matches the material covered in topics 4 through 5 [from here](https://github.com/jagajaga/FP-Course-ITMO).
 
-В качестве вспомогательного материала про parser combinators и тестирование
-при выполнении этого ДЗ рекомендуется использовать данные [слайды](https://slides.com/fp-ctd/lecture-55).
+Before doing this HW, we recommend [these slides](https://slides.com/fp-ctd/lecture-55) as additional material about parser combinators and testing.
 
-Некоторые задания имеют усложнённые версии, которые необходимо выполнять **дополнительно к базовой**, но они также будут оценены дополнительными баллами.
+Some tasks have advanced versions that must be completed ** in addition to the basic **, but they will also be assessed with additional points.
 
-Тесты должны находиться в директории `test/`
+Tests should be in the `test /` directory
 
-Тесты должны запускаться командной `stack test`.
+Tests should be run by the command `stack test`.
 
-В заданиях явно указано, какие тесты для них должны быть реализованы.
+The assignments explicitly indicate which tests should be implemented for them.
 
-При выполнении домашних заданий, пожалуйста, используйте резолвер `lts-16.5`.
+For homework, please use the `lts-16.5` resolver.
 
-# Задания
+# Deadline
 
-## Блок 1: `Functor` и его друзья
+00:00 UTC 16 November 2020.
 
-### Задание 1
+Submit to Github classrooms [here](https://classroom.github.com/a/_IUUxwd3).
 
-**Тесты:** Это задание необходимо протестировать при помощи простых unit-тестов.
+# Tasks
 
-#### Основное задание
+## Part 1: `Functor` and its friends
 
-В ДЗ1 необходимо было написать функцию, которая суммирует числа в строке. В формулировке задания было допущено серьёзное ослабление, а именно — данные на вход подаются валидные. В этом задании Вам необходимо реализовать безопасную функцию поиска суммы, а именно:
+### Task 1
+
+**Tests:** This task should be tested with simple unit tests.
+
+#### Basic version
+
+In HW 1, it was necessary to write a function that sums the numbers in a string. The definition of the task included a strong assumption about the validity of input data. In this task, you need to implement a secure function for finding the sum, namely:
 
 ```haskell=
 stringSum :: String -> Maybe Int
 ```
-Числа в строке разделены одним или несколькими пробельными символами.
-Если хотя бы один элемент строки нельзя сконвертировать в целое число, то необходиомо вернуть `Nothing`.
+The numbers in the string are separated by one or more whitespace characters.
+If at least one element of the string cannot be converted to an integer, then it is necessary to return `Nothing`.
 
-Функция должна использовать инстанс Traversable для листа.
+The function should use a Traversable instance for the leaf.
 
-#### Усложненное задание
-Необходимо написать несколько простых проперти тестов на эту функцию.
+#### Advanced version
 
-### Задание 2
+It is necessary to write a few simple property tests for this function.
 
-Дан следующий тип данных:
+### Task 2
+
+Given the following data type:
 
 ```haskell=
 data Tree a
@@ -51,56 +57,57 @@ data Tree a
   | Leaf a
 ```
 
-Реализуйте вручную инстансы `Functor`, `Applicative`, `Foldable` и `Traversable` для `Tree`.
+Manually implement the `Functor`,` Applicative`, `Foldable` and` Traversable` instances for `Tree`.
 
-Должны выполняться законы этих тайпклассов.
+The laws of these typeclasses must be followed.
 
 
-### Задание 3:
+### Task 3:
 
-Дан следующий тип данных:
+Given the following data type:
 
 ```haskell=
 data NonEmpty a = a :| [a]
 ```
 
-Реализуйте вручную инстансы `Functor`, `Applicative`, `Monad`, `Foldable` и `Traversable` для `NonEmpty`.
+Manually implement the `Functor`,` Applicative`, `Monad`,` Foldable` and `Traversable` instances for` NonEmpty`.
 
-Во время реализации инстансов для `NonEmpty` можно использовать соответствующие инстансы для списка.
+While implementing instances for `NonEmpty`, you can use the corresponding instances for the list.
 
 
-## Блок 2: Монады и монадические вычисления
+## Part 2: Monads and monadic computation
 
-### Задание 1
+### Task 1
 
-**Тесты:** Это задание необходимо протестировать при помощи простых unit-тестов.
+**Tests:** This task should be tested with simple unit tests.
 
-Арифметическое выражение (именно выражение, не результат его вычисления) можно представить рекурсивным алгебраическим типом данных. Реализуйте этот тип данных, чтобы с его помощью можно было задавать следующие операции:
+An arithmetic expression (precisely the expression, not the result of its calculation) can be represented by a recursive algebraic data type. Implement this data type so that it would be possible to do the following operations with it:
 
-* Целочисленные константы
-* Сложение двух выражений
-* Вычитание выражений
-* Произведение выражений
-* Деление выражений
-* Возведение в степень выражений
+* Integer constants
+* Adding two expressions
+* Subtracting expressions
+* Multiplying expressions
+* Dividing expressions
+* Exponentiation of expressions
 
-После этого напишите функцию, которая принимает выражение и вычисляет его. Обратите внимание на то, что выражение может не получиться вычислить по разным причинам.
+After that, write a function that takes an expression and evaluates it. Please note that the expression might not be evaluated for various reasons.
 
 ```haskell
 eval :: Expr -> Either ArithmeticError Int
 ```
 
-То есть Вы должны создать свой тип данных, который обозначает арифметическую ошибку и возвращать `Either` — либо ошибка, которая возникла, либо результат. Если выражение содержит несколько ошибок, то можно вернуть любую.
+That is, you must create your own data type that denotes an arithmetic error and return `Either` – either the error that occurred or the result. If the expression contains several errors, then any of them can be returned.
 
-Достаточно проверять только на следующие арифметические ошибки:
+It is enough to check only for the following arithmetic errors:
 
-1. Деление на 0.
-2. Возведение в отрицательную степень.
+1. Division by 0.
+2. Raising to a negative power.
 
-**Подсказка:** если реализовать функцию с `Either` сразу тяжело, то попробуйте `eval :: Expr -> Maybe Int`, после чего замените `Maybe` на `Either String`, а затем `String` можно будет заменить за свой тип данных.
+**Hint:** if it's hard to implement a function with `Either` right away, then try `eval :: Expr -> Maybe Int`, then replace `Maybe` with` Either String`, and then `String` can be replaced with your own data type.
 
-### Задание 2
-Реализуйте [Simple Moving Average](https://en.wikipedia.org/wiki/Moving_average) алгоритм, используя State монаду.
+### Task 2
+Implement the [Simple Moving Average] (https://en.wikipedia.org/wiki/Moving_average) algorithm using the State monad.
+
 ```haskell
 ghci> moving 4 [1, 5, 3, 8, 7, 9, 6]
 [1.0, 3.0, 3.0, 4.25, 5.75, 6.75, 7.5]
@@ -109,77 +116,81 @@ ghci> moving 2 [1, 5, 3, 8, 7, 9, 6]
 [1.0, 3.0, 4.0, 5.5, 7.5, 8.0, 7.5]
 ```
 
-## Блок 3: Парсер-комбинаторы
+## Part 3: Parser combinators
 
-Это блок самый важный в этом домашнем задании. Реализация всех упражнений из этого блока поможет понять, как устроены парсер-комбинаторы, а это важно, потому что они крайне полезны на практике. Перед решением заданий убедитесь, что вы осознали материал лекции и можете прорешать базовые упражнения по следующим ссылкам:
+This is the most important part of this homework. The implementation of all the exercises in this part will help you understand how parser combinators work, which is important because they are extremely useful in practice. Before solving the tasks, make sure that you understand the material of the lecture and can solve the basic exercises at the following links:
 
 * [Parser Combinators: Basics](http://www.seas.upenn.edu/~cis194/spring13/hw/10-applicative.pdf)
 * [Parser Combinators: Implementing simple parser](http://www.seas.upenn.edu/~cis194/spring13/hw/11-applicative2.pdf)
 
-Основная часть упражнений оттуда всё равно является частью этого домашнего задания.
+Main exercises from there are a part of this homework, anyway.
 
-**Тесты:** в заданиях этого блока необходимо написать несколько юнит-тестов при помощи `hspec`. Property-based тесты по желанию.
+**Tests:** for the tasks of this part, you need to write several unit tests using `hspec`. Property-based tests are optional.
 
-### Задание 1: Copy-paste
+### Task 1: Copy-paste
 
-Имеется тип простого парсер-комбинатора:
+Here’s the data type of a simple parser combinator:
 
 ```haskell=
 data Parser s a = Parser { runParser :: [s] -> Maybe (a, [s]) }
 ```
 
-В отличие от парсера предложенного на практике, он может работать не только со строкой, но и с любым потоком данных. Реализуйте вручную инстансы `Functor`, `Applicative`, `Monad` и `Alternative` для этого парсера.
+Unlike the parser proposed in practice, it can work not only with a string, but with any data stream. Manually implement the `Functor`,` Applicative`, `Monad` and` Alternative` instances for this parser.
 
-### Задание 2: Базовые комбинаторы
+### Task 2: Basic combinators
 
-Реализуйте следующие базовые комбинаторы:
+Implement the following basic combinators:
 
-1. `ok` — парсер никогда не падает и не поглощает инпут.
-2. `eof` — проверяет, что парсер дошёл до конца потока данных (иначе падает).
-3. `satisfy` — парсер принимает предикат на элемент потока и возвращает элемент, поглащая его из потока, если предикат на элемент равен `True`, иначе падает.
-4. `element` и `stream` — парсят один или несколько элементов потока (как `char` и `string`).
+1. `ok` – the parser never crashes and does not consume input.
+2. `eof` – checks that the parser has reached the end of the data stream (otherwise it crashes).
+3. `satisfy` – the parser takes a predicate for an element of the stream and returns the element, absorbing it from the stream, if the predicate for an element is` True`, otherwise it falls.
+4.` element` and `stream` - parse one or more stream elements (like` char` and `string`).
 
-### Задание 3: Простые парсеры
+### Task 3: Simple parsers
 
-Используя существующие комбинаторы (реализовав по необходимости остальные), напишите следующие парсеры строковых потоков:
+Using the existing combinators (and implementing others if needed), write the following string stream parsers:
 
-1. Парсер правильных скобочных последовательностей (падает, если последовательность неправильная, и не падает, если правильная).
-2. Парсер целого числа, перед которым может быть знак `+` или `-`.
+1. Parser of correct parenthesis sequences (crashes if the sequence is incorrect, and does not crash if it is correct).
+2. Parser of an integer, which can be preceded by a `+` or `-`.
 
-### Задание 4: Непростой парсер
+### Task 4: A Difficult Parser
 
-Написать парсер списка списков чисел, разделённых запятой. Парсер должен иметь тип:
+Write a parser for a list of lists of numbers separated by commas. The parser must be of type:
+
 ```haskell
 listlistParser :: Parser Char [[Int]]
 ```
-Все числа перечисленны через запятую. В начале каждого списка находится число — длина списка. Таким образом можно понять, где заканчивается каждый список. То есть список
+All numbers are listed separated by commas. At the beginning of each list is a number – the length of the list. This way, you can understand where each list ends. 
+
+That is, the list
 
 ```haskell=
 [ [1, 10], [5, -7, 2] ]
 ```
 
-в строковом виде может быть записан следующим образом:
+in the string form can be written as follows:
 
 ```haskell=
 "2, 1,+10  , 3,5,-7, 2"
 ```
 
-## Бонусное задание
-Данное задание направлено на изучение монады `Cont`
+## Bonus task
+This task is aimed at studying the `Cont` monad
 
 ```haskell
 newtype Cont r a = Cont { runCont :: (a -> r) -> r }
 ```
 
-Данная монада не имеет имеет простого аналога в императивных языках, но может быть полезна в некоторых случаях.
+This monad has no simple analogue in imperative languages, but it can be useful in some cases.
 
-В данном задании от Вас требуется разобраться или реализовать самостоятельно инстансы `Functor`, `Applicative`, и `Monad` для `Cont`.
+In this task, you are required to figure out or implement on your own the instances of `Functor`,` Applicative`, and `Monad` for` Cont`.
 
-Затем, используя эту монаду реализовать небольшое подмножество системных вызовов операционной системы.
+Then, using this monad, implement a small subset of OS system calls.
 
-А именно, необходимо поддержать `read`, `write`, `exit`, `yield`, `fork`.
+Namely, `read`,` write`, `exit`,` yield`, `fork` must be supported.
 
-Должна иметься возможность написать следующий код:
+You should be able to write the following code:
+
 ```haskell
 main' = do
   x <- readLine
@@ -188,7 +199,7 @@ main' = do
   exit Success
 ```
 
-Требуется также реализовать функцию `kernel`, которая будет интерпретировать данный код.
+It is also required to implement the `kernel` function, which will interpret this code.
 
-Информацию о монаде Cont можно найти [здесь](https://slides.com/fp-ctd/lecture-55#/29),
-а больше информации, как реализовать то, что требуется, — [здесь](https://www.dropbox.com/s/z1e1kxi32zl8kbd/DDToOS.pdf?dl=0).
+Information about the Cont monad can be found [here] (https://slides.com/fp-ctd/lecture-55#/29),
+and more information on how to implement what is required is [here] (https://www.dropbox.com/s/z1e1kxi32zl8kbd/DDToOS.pdf?dl=0).
