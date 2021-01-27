@@ -1,118 +1,117 @@
-# Haskell: ДЗ 1 -- Базовые конструкции языка и не только
+# Haskell: HW 1 – Basic language constructs and more 
 
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com//fp-homework/blob/master/hw1/LICENSE)
 
-Первое домашнее задание проверяет понимание базовых конструкций языка. А также стандартные функции и базовые интерфейсы.
-Обратите внимание, что задание соответствует материалу, который рассказан в темах со 2 по 4ю [отсюда](https://github.com/jagajaga/FP-Course-ITMO).
+The first homework assignment tests your understanding of basic language constructs, as well as standard functions and basic interfaces.
 
-В качестве вспомогательного материала про тестирование
-при выполнении этого ДЗ рекомендуется использовать данные [слайды](https://slides.com/fp-ctd/lecture-55).
+Please note that the assignment matches the material covered in topics 2 through 4 [from here](https://github.com/jagajaga/FP-Course-ITMO).
 
-Некоторые задания имеют усложнённые версии, которые необходимо выполнять **дополнительно к базовой**, но они также будут оценены дополнительными баллами.
+Before doing this HW, we recommend [these slides](https://slides.com/fp-ctd/lecture-55) as additional material about testing. 
 
-В данном домашнем задании от Вас требуется познакомиться с некоторыми библиотеками для тестирования и реализовать тесты с помощью них.
+Some tasks have advanced versions that should be done **in addition to regular tasks**, but those will also be assessed with extra points. 
 
-Тесты должны находиться в директории `test/`
+This homework assignment requires you to get acquainted with some testing libraries and do the tests using them.
 
-Тесты должны запускаться командной `stack test`.
+Tests should be in the `test /` directory
 
-В заданиях явно указано, какие тесты для них должны быть реализованы.
+Tests should run with `stack test`.
 
-При выполнении домашних заданий, пожалуйста, используйте резолвер `lts-16.5`.
+The tests to be done are explicitly indicated in the tasks. 
 
-## Блок 1:  Алгебраические типы данных
+For the homework, please use the `lts-16.5` resolver.
 
-В этом блоке разрешено использовать автоматический `deriving` только для `Show`. Остальные инстансы необходимо реализовывать самостоятельно.
+## Part 1: Algebraic Data Types
 
-### Задание 1: Дни недели
+In this part, it is allowed to use automatic `deriving` only for `Show`. The rest of the instances must be implemented by yourself.
 
-**Тесты:** Это задание необходимо протестировать при помощи простых unit-тестов.
+### Task 1: Days of the Week
 
-Определите свой тип данных для _Дней недели_. Реализуйте следующие функции:
+**Tests:** This task should be tested with simple unit tests.
 
-1. `nextDay`: возвращает следующий за переданным день недели.
-2. `afterDays`: возвращает день недели, который наступит после заданного через переданное число дней.
-3. `isWeekend`: проверяет, является ли день недели выходным.
-4. `daysToParty`: выводит число дней, оставшихся до пятницы.
+Define your own data type for _Day of the Week_. Implement the following functions:
 
-### Задание 2: Натуральные числа
+1.` nextDay`: Returns the day that follows the day of the week that was given as input.
+2. `afterDays`: Returns the day of the week after a given number of days has passed.
+3. `isWeekend`: Checks if the day counts as being on the weekend.
+4. `daysToParty`: Displays the number of days left until Friday.
 
-**Тесты:** Это задание необходимо протестировать при помощи простых unit-тестов. Property-based тесты по желанию (оцениваются дополнительными баллами).
+### Task 2: Natural numbers
 
-#### Базовое задание
+**Tests:** This task should be tested with simple unit tests. Property-based tests are optional (and are evaluated with additional points).
 
-Этот тип данных для натуральных чисел определяется следующим образом:
+#### Basic task
+
+The datatype for natural numbers is defined as follows:
 
 ```haskell
 data Nat = Z | S Nat
 ```
 
-Реализуйте следующие операции (которые должны быть реализованы полностью самостоятельно):
+Implement the following operations (which should be implemented entirely on your own):
 
-1. Сложение двух натуральных чисел.
-2. Умножение двух натуральных чисел.
-3. Вычитание натуральных чисел.
-4. Превращение целых чисел в натуральные и наоборот.
-5. Проверка натуральных чисел на равенство.
-6. Сравнение натуральных чисел.
+1. Addition of two natural numbers.
+2. Multiplication of two natural numbers.
+3. Subtraction of natural numbers.
+4. Converting integers to natural numbers and vice versa.
+5. Checking natural numbers for equality.
+6. Comparison of natural numbers.
 
-#### Усложнённая версия
+#### Advanced task
 
-Дополнительно требуется реализовать следующие функции:
+Additionally, you need to implement the following functions:
 
-7. Проверка натурального числа на чётность.
-8. Целочисленное деление натуральных чисел.
-9. Остаток от деления натурального числа на другое.
+7. Checking a natural number for parity.
+8. Integer division of natural numbers.
+9. Getting a remainder of dividing a natural number by another.
 
-### Задание 3: Растительность
+### Task 3: Greens
 
-**Тесты:** Это задание необходимо протестировать при помощи простых unit-тестов.
+**Tests:** This task should be tested with simple unit tests.
 
-Тип данных для двоичного дерева имеет два конструктора:
-1. Лист дерева, не содержит данных.
-2. Узел дерева. Содержит _непустой_ список одинаковых значений и имеет двух детей.
+The data type of a binary tree has two constructors:
 
-_Двоичное дерево_ называется _двоичным деревом поиска_ если оно удовлетворяет следующему условию: значения всех элементов в левом поддереве меньше значения в узле, а значения элементов в правом поддереве больше значения в узле.
+1. Leaf node, contains no data.
+2. Branch node,  contains a _non-empty_ list of identical values ​​and has two children.
 
-Реализуйте следующие операции с _двоичным деревом поиска_:
+A _binary tree_ is called a _binary search tree_ if it satisfies the following conditions: the values ​​of all the elements in the left subtree are smaller than the value ​​in the node, and the values ​​of all the elements in the right subtree are greater than the values ​​in the node.
 
-1. Проверка дерева на пустоту.
-2. Подсчёт размера дерева (то есть числа элементов в нём).
-3. Поиск заданного элемента в дереве (используйте тот факт, что дерево является деревом поиска).
-4. Вставка нового элемента в _двоичное дерево поиска_. Если вставляемый элемент уже находится в дереве, то необходимо добавить его в список того узла, в котором этот элемент находится. Тут следует обратить внимание, что если в узле дерева есть список элементов, то этот список всегда непустой.
-5. Функцию `fromList`, которая создаёт дерево из списка элементов.
-6. Функцию, которая удаляет заданный элемент из дерева.
+Implement the following operations on a _binary search tree_:
 
-## Блок 2: Сворачиваемся
+1. Checking if a tree is empty. 
+2. Calculating the size of the tree (that is, the number of elements in it).
+3. Search for a given item in the tree (use the fact that the tree is a search tree).
+4. Inserting a new item into the _binary search tree_. If the inserted element is already in the tree, then it is necessary to add it to the list of the node in which this element is located. It should be noted here that if a tree node has a list of elements, then this list is always non-empty.
+5. Function `fromList` that creates a tree from a list of elements.
+6. A function that removes a given element from the tree.
 
-### Задание 1: Инстанс Foldable для Tree
+## Part 2: Roll up
 
-**Тесты:** Это задание необходимо протестировать при помощи простых unit-тестов. Property-based тесты по желанию (оцениваются дополнительными баллами).
+### Task 1: A Foldable instance for Tree
 
-В этом задании **обязательно** использовать расширение языка `-XInstanceSigs` и указывать типы функций в инстансах.
-При этом необходимо реализовать обе функции `foldMap` и `foldr`.
+**Tests:** This task should be tested with simple unit tests. Property-based tests are optional (and are evaluated with additional points).
 
-Реализуйте инстанс `Foldable` для типа `Tree`.
-Инстанс должен быть реализован таким образом, чтобы выполнялось свойство: `toList . fromList ≡ sort`.
+In this assignment, **be sure** to use the `-XInstanceSigs` language extension and specify function types in instances. It is necessary to implement both `foldMap` and` foldr` functions.
 
-### Задание 2: Разбиваемся
+Implement a Foldable instance for the Tree type. The instance must be implemented in such a way that the property: `toList. fromList ≡ sort` holds true.
 
-**Тесты:** Это задание необходимо протестировать при помощи простых unit-тестов. Property-based тесты по желанию (оцениваются дополнительными баллами).
+### Task 2: Breaking it down
 
-#### Базовая версия
+**Tests:** This task should be tested with simple unit tests. Property-based tests are optional (and are evaluated with additional points).
 
-Используя свёртку, реализуйте функцию `splitOn`, которая разбивает список на подсписки по элементу.
+#### Basic task
+
+Using fold, implement the `splitOn` function, which splits a list into sublists by a given item.
 
 ```haskell
 ghci> splitOn '/' "path/to/file"
 ["path", "to", "file"]
 ```
 
-Стоит обратить внимание, что функция `splitOn` всегда возвращает непустой список элементов. Это должно быть отражено в типе. Пример приведён для обычного списка, хотя это решение не полностью корректное.
+Note that the splitOn function always returns a non-empty list of elements. This should be reflected in its type. The example given is for a regular list, even though that solution is not entirely correct.
 
-#### Усложнённая версия
+#### Advanced task
 
-Дополнительно реализуйте функцию (опять же, используя свёртку) `joinWith`, обратную `splitOn`. При этом Ваши реализации должны удовлетворять свойству:
+Additionally, implement the function (again using fold) `joinWith`, the opposite of` splitOn`. Moreover, your implementation must satisfy the property:
 
 `joinWith x . splitOn x ≡ id`.
 
@@ -121,52 +120,52 @@ ghci> joinWith '/' ["path", "to", "file"]
 "path/to/file"
 ```
 
-Стоит обратить внимание на то, что функция `joinWith` принимает непустой список.
+Note that the `joinWith` function accepts a non-empty list.
 
-## Блок 3: Моноиды
+## Part 3: Monoids
 
-### Задание 1
+### Task 1
 
-**Тесты:** Это задание необходимо протестировать при помощи простых unit-тестов.
+**Tests:** This task should be tested with simple unit tests.
 
-#### Базовая версия
+#### Basic task
 
-Напишите функцию, принимающую список списков внутри `Maybe` и возвращающую конкатенацию всех внутренних списков.
+Write a function that takes a list of lists inside Maybe and returns all the inner lists, concatenated.
 
 ```haskell
 ghci> maybeConcat [Just [1,2,3], Nothing, Just [4,5]]
 [1,2,3,4,5]
 ```
 
-#### Усложнённая версия
+#### Advanced task
 
-Функция должна принимать произвольный набор `Either`, где и `Left` и `Right` содержат некоторые моноидальные элементы, и необходимо вернуть пару из результатов моноидального объединения отдельно элементов внутри `Left` и отдельно элементов внутри `Right`.
+The function must accept an arbitrary set of `Either`, where both` Left` and `Right` contain some monoidal elements. It must return a pair with the results of the monoidal concatenation of elements inside` Left` and elements inside `Right` separated.
 
 ```haskell
 ghci> eitherConcat [Left (Sum 3), Right [1,2,3], Left (Sum 5), Right [4,5]]
 (Sum {getSum = 8}, [1,2,3,4,5])
 ```
 
-### Задание 2
+### Task 2
 
-**Тесты:** Это задание необходимо протестировать при помощи простых unit-тестов.
+** Tests: ** This task should be tested with simple unit tests.
 
-#### Базовая версия
+#### Basic task
 
-Реализуйте инстансы алгебраических классов типов для следующих структур данных. Ваши инстансы должны удовлетворять законам для этих структур.
+Implement instances of algebraic typeclasses for the following data structures. Your instances must comply with the laws for these structures.
 
-1. `Semigroup` для `data NonEmpty a = a :| [a]`.
-2. `Semigroup` для типа данных `data ThisOrThat a b = This a | That b | Both a b`.
+1. `Semigroup` for `data NonEmpty a = a :| [a]`.
+2. `Semigroup` for the data type `data ThisOrThat a b = This a | That b | Both a b`.
 
-#### Усложнённая версия
+#### Advanced task
 
-Дополнительно реализуйте следующие инстансы:
+Additionally, implement the following instances:
 
-1. `Semigroup` и `Monoid` для строк, объединяемых при помощи `'.'`.
+1. `Semigroup` and `Monoid` for strings, combined with `'.'`.
 
 ```haskell
 ghci> Name "root" <> Name "server"
 Name "root.server"
 ```
 
-2. `Semigroup` и `Monoid` для `newtype Endo a = Endo { getEndo :: a -> a }`.
+2. `Semigroup` and `Monoid` for `newtype Endo a = Endo { getEndo :: a -> a }`.
