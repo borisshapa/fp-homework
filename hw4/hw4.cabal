@@ -18,24 +18,56 @@ tested-with:         GHC == 8.0.1
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Lib
+  exposed-modules:     Task1.Strict, Task1.Lazy
+                     , Task2.MonteCarlo
+                     , Task3.ConcurrentHashTable, Task3.ConcurrentHashTableUtils
+                     , Task4.HalyavaScript, Task4.HalyavaScriptSamples
+                     , Task5.HS2JS
+                     , Task6.FSLenses
+                     , Task7.FSTraversal
+                     , Task8.ListZipper, Task8.Grid, Task8.Comonad19
   ghc-options:         -Wall
-  build-depends:       base >= 4.9 && < 5
-  default-language:    Haskell2010
-
-executable hw4
-  hs-source-dirs:      app
-  main-is:             Main.hs
-  ghc-options:         -Wall -Werror -threaded -rtsopts -with-rtsopts=-N
-  build-depends:       base
-                     , hw4
+  build-depends:       async >= 2.1.1
+                     , base >= 4.9 && < 5
+                     , comonad
+                     , directory
+                     , filepath
+                     , hashable
+                     , microlens
+                     , monad-par
+                     , monad-par-extras
+                     , mtl
+                     , parallel
+                     , profunctors
+                     , random
+                     , stm
+                     , vector
   default-language:    Haskell2010
 
 test-suite hw4-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
+  other-modules:       Task3Spec
+                     , Task5Spec
   main-is:             Spec.hs
-  build-depends:       base
+  build-depends:       async
+                     , base
+                     , hspec
                      , hw4
-  ghc-options:         -Wall -Werror -threaded -rtsopts -with-rtsopts=-N
+  ghc-options:         -Wall -Werror -threaded -rtsopts -with-rtsopts=-N4
+  default-language:    Haskell2010
+
+benchmark hw4-benchmark
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      benchmark
+  other-modules:       Task1Bench
+                     , Task2Bench
+                     , Task3Bench
+  main-is:             Main.hs
+  build-depends:       async
+                     , base
+                     , criterion
+                     , extra
+                     , hw4
+  ghc-options:         -Wall -Werror -threaded -rtsopts "-with-rtsopts=-N4 -s"
   default-language:    Haskell2010

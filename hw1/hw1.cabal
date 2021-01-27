@@ -6,9 +6,9 @@ description:         Task 1 for FP ITMO course
 homepage:            https://github.com//fp-homework/tree/master/hw1#readme
 license:             MIT
 license-file:        LICENSE
-author:              Author name here
-maintainer:          example@example.com
-copyright:           2020 Author name here
+author:              Boris Shaposhnikov
+maintainer:          bshaposhnikov01@gmail.com
+copyright:           2020 Boris Shaposhnikov
 
 category:            Web
 build-type:          Simple
